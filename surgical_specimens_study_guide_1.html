@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surgical Specimens — AST Standards of Practice Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #F0F4F8;
+  --navy-mid: #FFFFFF;
+  --teal: #0B8A85;
+  --teal-light: #0EA5A0;
+  --teal-faint: rgba(14,165,160,0.08);
+  --amber: #B45309;
+  --amber-faint: rgba(180,83,9,0.08);
+  --red: #C0392B;
+  --red-faint: rgba(192,57,43,0.08);
+  --green: #166534;
+  --green-faint: rgba(22,101,52,0.08);
+  --purple: #6D28D9;
+  --purple-faint: rgba(109,40,217,0.08);
+  --text: #1A2636;
+  --text-muted: #4A5C6E;
+  --text-dim: #8A9BB0;
+  --border: rgba(0,0,0,0.09);
+  --border-teal: rgba(14,165,160,0.30);
+  --card-bg: #FFFFFF;
+  --card-hover: #F5FAFA;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'Geist', system-ui, sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--sans); background: var(--navy); color: var(--text); min-height: 100vh; line-height: 1.6; }
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, #0B6B67 0%, #0EA5A0 60%, #0D9488 100%);
+  border-bottom: 1px solid var(--border-teal);
+  padding: 3rem 2rem 2.5rem;
+  position: relative; overflow: hidden;
+}
+.header::before { content:''; position:absolute; top:-60px; right:-60px; width:280px; height:280px; background:radial-gradient(circle,rgba(255,255,255,0.15) 0%,transparent 70%); pointer-events:none; }
+.header::after { content:''; position:absolute; bottom:-40px; left:30%; width:200px; height:200px; background:radial-gradient(circle,rgba(255,255,255,0.07) 0%,transparent 70%); pointer-events:none; }
+.header-inner { max-width: 980px; margin: 0 auto; position: relative; }
+.header-kicker { font-family:var(--mono); font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,0.8); margin-bottom:.75rem; }
+.header h1 { font-family:var(--serif); font-size:clamp(1.9rem,4vw,2.8rem); font-weight:400; color:#fff; line-height:1.15; margin-bottom:.5rem; }
+.header h1 em { font-style:italic; color:rgba(255,255,255,0.85); }
+.header-sub { font-size:14px; color:rgba(255,255,255,0.75); margin-bottom:1.5rem; }
+.header-badges { display:flex; flex-wrap:wrap; gap:8px; }
+.hbadge { font-family:var(--mono); font-size:11px; background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.3); color:#fff; border-radius:4px; padding:3px 10px; }
+
+/* NAV */
+.nav-wrap { background:#FFFFFF; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:50; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.nav-inner { max-width:980px; margin:0 auto; padding:0 2rem; display:flex; gap:2px; overflow-x:auto; scrollbar-width:none; }
+.nav-inner::-webkit-scrollbar { display:none; }
+.nav-tab { font-family:var(--sans); font-size:13px; font-weight:400; color:var(--text-muted); background:transparent; border:none; border-bottom:2px solid transparent; padding:13px 15px; cursor:pointer; white-space:nowrap; transition:color .2s,border-color .2s; display:flex; align-items:center; gap:6px; }
+.nav-tab:hover { color:var(--text); }
+.nav-tab.active { color:var(--teal); border-bottom-color:var(--teal); font-weight:500; }
+.tab-icon { font-size:15px; }
+
+/* CONTENT */
+.content-wrap { max-width:980px; margin:0 auto; padding:2rem 2rem 4rem; }
+.section { display:none; }
+.section.active { display:block; }
+
+/* HEADINGS */
+.section-heading { font-family:var(--serif); font-size:1.75rem; font-weight:400; color:var(--text); margin-bottom:.4rem; }
+.section-sub { font-size:13.5px; color:var(--text-muted); margin-bottom:2rem; line-height:1.5; }
+.sub-label { font-family:var(--mono); font-size:10.5px; letter-spacing:2px; text-transform:uppercase; color:var(--text-dim); margin:1.75rem 0 .85rem; }
+
+/* ALERTS */
+.alert { display:flex; gap:12px; padding:1rem 1.25rem; border-radius:8px; margin-bottom:1.25rem; font-size:14px; line-height:1.6; }
+.alert-icon { font-size:18px; flex-shrink:0; margin-top:1px; }
+.alert-teal  { background:var(--teal-faint);   border:1px solid rgba(14,165,160,0.25);   color:var(--text); }
+.alert-amber { background:var(--amber-faint);  border:1px solid rgba(180,83,9,0.20);     color:var(--text); }
+.alert-red   { background:var(--red-faint);    border:1px solid rgba(192,57,43,0.20);    color:var(--text); }
+.alert-green { background:var(--green-faint);  border:1px solid rgba(22,101,52,0.20);    color:var(--text); }
+.alert-purple{ background:var(--purple-faint); border:1px solid rgba(109,40,217,0.20);   color:var(--text); }
+
+/* CARDS */
+.card-grid { display:grid; gap:1rem; margin-bottom:1.5rem; }
+.card-grid.two   { grid-template-columns:repeat(2,1fr); }
+.card-grid.three { grid-template-columns:repeat(3,1fr); }
+.card { background:var(--card-bg); border:1px solid var(--border); border-radius:10px; padding:1.1rem 1.25rem; transition:background .2s,border-color .2s; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+.card:hover { background:var(--card-hover); border-color:rgba(14,165,160,0.3); }
+.card-label { font-family:var(--mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--teal); margin-bottom:6px; }
+.card-title { font-size:15px; font-weight:500; color:var(--text); margin-bottom:8px; }
+.card-body  { font-size:13.5px; color:var(--text-muted); line-height:1.6; }
+
+/* STAT ROW */
+.stat-row { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.5rem; }
+.stat-box { background:var(--card-bg); border:1px solid var(--border); border-radius:10px; padding:1rem 1.25rem; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+.stat-val { font-family:var(--mono); font-size:1.5rem; font-weight:500; color:var(--teal); line-height:1; margin-bottom:4px; }
+.stat-lbl { font-size:12px; color:var(--text-muted); line-height:1.4; }
+
+/* DETAIL LIST */
+.detail-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.detail-list li { font-size:13.5px; color:var(--text-muted); padding-left:1.25rem; position:relative; line-height:1.6; }
+.detail-list li::before { content:'›'; position:absolute; left:0; color:var(--teal); font-weight:600; }
+.detail-list li strong { color:var(--text); font-weight:500; }
+
+/* DIVIDER */
+.divider { border:none; border-top:1px solid var(--border); margin:2rem 0; }
+
+/* EXPANDABLE */
+.exp-card { background:var(--card-bg); border:1px solid var(--border); border-radius:10px; margin-bottom:.65rem; overflow:hidden; transition:border-color .2s; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+.exp-card.open { border-color:rgba(14,165,160,0.35); }
+.exp-head { display:flex; justify-content:space-between; align-items:center; padding:.9rem 1.25rem; cursor:pointer; gap:12px; }
+.exp-head:hover { background:#F0FAF9; }
+.exp-head-left { flex:1; min-width:0; }
+.exp-tag { font-family:var(--mono); font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--teal); margin-bottom:3px; }
+.exp-title { font-size:14.5px; font-weight:500; color:var(--text); }
+.exp-chevron { font-size:12px; color:var(--text-dim); transition:transform .25s; flex-shrink:0; }
+.exp-card.open .exp-chevron { transform:rotate(180deg); color:var(--teal); }
+.exp-body { display:none; padding:0 1.25rem 1.1rem; border-top:1px solid var(--border); }
+.exp-card.open .exp-body { display:block; padding-top:1rem; }
+
+/* KEY POINT */
+.keypoint { background:linear-gradient(135deg,rgba(14,165,160,0.07),rgba(14,165,160,0.03)); border:1px solid rgba(14,165,160,0.25); border-left:3px solid var(--teal); border-radius:0 8px 8px 0; padding:1rem 1.25rem; margin:1rem 0; font-size:14px; color:var(--text); line-height:1.6; }
+.keypoint strong { color:var(--teal); }
+
+/* WARNING BOX */
+.warn-box { background:rgba(192,57,43,0.06); border:1px solid rgba(192,57,43,0.2); border-left:3px solid var(--red); border-radius:0 8px 8px 0; padding:1rem 1.25rem; margin:1rem 0; font-size:14px; color:var(--text); line-height:1.6; }
+.warn-box strong { color:var(--red); }
+
+/* NUMBERED STEPS */
+.steps { display:flex; flex-direction:column; gap:1rem; }
+.step { display:flex; gap:1rem; align-items:flex-start; }
+.step-num { flex-shrink:0; width:28px; height:28px; background:var(--teal-faint); border:1px solid var(--border-teal); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:12px; color:var(--teal); font-weight:500; margin-top:2px; }
+.step-content { flex:1; }
+.step-title { font-size:14px; font-weight:500; color:var(--text); margin-bottom:4px; }
+.step-body  { font-size:13.5px; color:var(--text-muted); line-height:1.6; }
+
+/* LABEL CHECKLIST */
+.checklist { display:grid; grid-template-columns:repeat(2,1fr); gap:.5rem; margin-top:.75rem; }
+.check-item { display:flex; align-items:flex-start; gap:8px; background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:.7rem 1rem; font-size:13px; color:var(--text-muted); box-shadow:0 1px 2px rgba(0,0,0,0.04); }
+.check-item .chk { color:var(--teal); font-size:14px; flex-shrink:0; margin-top:1px; }
+.check-item span strong { color:var(--text); display:block; font-size:12.5px; margin-bottom:2px; }
+
+/* PPE GRID */
+.ppe-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:.75rem; margin-top:.75rem; }
+.ppe-item { background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:.85rem 1rem; text-align:center; box-shadow:0 1px 2px rgba(0,0,0,0.04); }
+.ppe-icon { font-size:24px; margin-bottom:6px; }
+.ppe-label { font-size:12.5px; color:var(--text-muted); }
+
+/* FIRST AID TABLE */
+.fa-table { width:100%; border-collapse:collapse; font-size:13.5px; }
+.fa-table th { background:rgba(192,57,43,0.08); color:var(--red); font-family:var(--mono); font-size:10.5px; letter-spacing:1px; text-transform:uppercase; padding:10px 14px; text-align:left; border-bottom:1px solid rgba(192,57,43,0.2); }
+.fa-table td { padding:10px 14px; color:var(--text-muted); border-bottom:1px solid var(--border); vertical-align:top; line-height:1.5; }
+.fa-table tr:last-child td { border-bottom:none; }
+.fa-table tr:hover td { background:#F5FAFA; color:var(--text); }
+.fa-table td:first-child { color:var(--text); font-weight:500; white-space:nowrap; }
+
+/* COMP TABLE */
+.comp-table { width:100%; border-collapse:collapse; font-size:13.5px; }
+.comp-table th { background:rgba(14,165,160,0.08); color:var(--teal); font-family:var(--mono); font-size:10.5px; letter-spacing:1px; text-transform:uppercase; padding:10px 14px; text-align:left; border-bottom:1px solid rgba(14,165,160,0.2); }
+.comp-table td { padding:10px 14px; color:var(--text-muted); border-bottom:1px solid var(--border); vertical-align:top; line-height:1.6; }
+.comp-table tr:last-child td { border-bottom:none; }
+.comp-num { font-family:var(--mono); font-size:12px; color:var(--teal); margin-right:6px; }
+
+/* REQUISITION FORM */
+.req-form { background:var(--card-bg); border:1px solid rgba(14,165,160,0.25); border-radius:10px; padding:1.25rem; margin-top:.75rem; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+.req-form-title { font-family:var(--mono); font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--teal); margin-bottom:1rem; }
+.req-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:.5rem; }
+.req-field { background:#F8FAFB; border:1px solid var(--border); border-radius:6px; padding:.6rem .9rem; }
+.req-field-label { font-family:var(--mono); font-size:10px; letter-spacing:1px; color:var(--text-dim); text-transform:uppercase; margin-bottom:2px; }
+.req-field-val { font-size:13px; color:var(--text-muted); }
+
+/* EVIDENCE CHAIN */
+.chain { display:flex; align-items:center; gap:0; flex-wrap:wrap; margin:1rem 0; }
+.chain-node { background:var(--teal-faint); border:1px solid var(--border-teal); border-radius:8px; padding:.6rem 1rem; font-size:13px; color:var(--teal); white-space:nowrap; }
+.chain-arrow { color:var(--text-dim); font-size:18px; padding:0 6px; }
+
+/* GLOSSARY */
+.glossary-grid { display:flex; flex-direction:column; gap:.5rem; }
+.gloss-item { background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:.85rem 1.1rem; display:grid; grid-template-columns:200px 1fr; gap:1rem; align-items:start; box-shadow:0 1px 2px rgba(0,0,0,0.04); }
+.gloss-term { font-family:var(--mono); font-size:12px; color:var(--teal); font-weight:500; line-height:1.5; }
+.gloss-def  { font-size:13.5px; color:var(--text-muted); line-height:1.6; }
+
+@media(max-width:640px){
+  .header { padding:2rem 1.25rem; }
+  .content-wrap { padding:1.5rem 1.25rem 3rem; }
+  .card-grid.two,.card-grid.three { grid-template-columns:1fr; }
+  .stat-row { grid-template-columns:repeat(2,1fr); }
+  .checklist,.req-grid { grid-template-columns:1fr; }
+  .ppe-grid { grid-template-columns:repeat(2,1fr); }
+  .gloss-item { grid-template-columns:1fr; gap:4px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-kicker">AST Standards of Practice · Effective April 13, 2008</div>
+    <h1>Handling &amp; Care of <em>Surgical Specimens</em></h1>
+    <p class="header-sub">Comprehensive Study Guide — Preanalytic Phase, Chain of Custody, Labeling, Preservatives, Special Specimens &amp; Systems Approach</p>
+    <div class="header-badges">
+      <span class="hbadge">Standards I – XIII</span>
+      <span class="hbadge">OSHA / EPA Compliance</span>
+      <span class="hbadge">HIPAA / Joint Commission</span>
+      <span class="hbadge">Formalin Safety</span>
+      <span class="hbadge">Chain of Custody</span>
+      <span class="hbadge">Medical-Legal Evidence</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav-inner">
+    <button class="nav-tab active" onclick="showTab('overview',this)"><span class="tab-icon">🔬</span>Overview</button>
+    <button class="nav-tab" onclick="showTab('standards1',this)"><span class="tab-icon">📋</span>Standards I–IV</button>
+    <button class="nav-tab" onclick="showTab('formalin',this)"><span class="tab-icon">⚗️</span>Formalin (Std V)</button>
+    <button class="nav-tab" onclick="showTab('special',this)"><span class="tab-icon">❄️</span>Special Specimens</button>
+    <button class="nav-tab" onclick="showTab('evidence',this)"><span class="tab-icon">⚖️</span>Evidence &amp; Devices</button>
+    <button class="nav-tab" onclick="showTab('systems',this)"><span class="tab-icon">🔄</span>Systems &amp; Docs</button>
+    <button class="nav-tab" onclick="showTab('competency',this)"><span class="tab-icon">✅</span>Competency</button>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content-wrap">
+
+  <!-- ══════════════════ TAB 1: OVERVIEW ══════════════════ -->
+  <div id="overview" class="section active">
+    <h2 class="section-heading">Overview &amp; Rationale</h2>
+    <p class="section-sub">Why proper specimen handling matters — error data, categories of loss, and the 6-step chain of custody every HCW must know.</p>
+
+    <div class="alert alert-teal">
+      <span class="alert-icon">🎯</span>
+      <div><strong>Purpose:</strong> Proper collection, labeling, preservation, transportation, and chain of custody ensures continuity of quality care and provides a method to retrieve needed information. Every HCW in the chain of custody must understand the procedures and the consequences of errors.</div>
+    </div>
+
+    <p class="sub-label">Error Data — University Healthcare Facility Study (6-Month Period)</p>
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-val">10,354</div>
+        <div class="stat-lbl">Surgery dept specimens studied</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val">38</div>
+        <div class="stat-lbl">Specimens had errors (surgery dept)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val">54/91</div>
+        <div class="stat-lbl">Mislabeled specimens from the surgery dept (hospital-wide)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val">4</div>
+        <div class="stat-lbl">Most common mislabeled procedures: breast, skin, colon, prostate</div>
+      </div>
+    </div>
+
+    <p class="sub-label">Two Categories of Specimen Loss</p>
+    <div class="card-grid two">
+      <div class="card">
+        <div class="card-label">Category 1 — Repeatable</div>
+        <div class="card-title">Procedure Can Be Repeated</div>
+        <div class="card-body">Still not optimal. Patient must repeat the risk of undergoing a procedure again, increasing morbidity, loss of time from job and family, and mental stress and anxiety. Healthcare facility faces possible litigation.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Category 2 — Irreplaceable ⚠️</div>
+        <div class="card-title">Specimen Cannot Be Replaced</div>
+        <div class="card-body">Greatest concern. Includes excised organs or tumors. Incomplete diagnosis, misdiagnosis, or delayed treatment can result in wrong treatment, unnecessary additional treatment, or treatment of the wrong body area. Litigation risk for the facility.</div>
+      </div>
+    </div>
+
+    <p class="sub-label">The Preanalytic Phase — 6-Step Chain of Custody</p>
+    <div class="alert alert-amber">
+      <span class="alert-icon">🔗</span>
+      <div><strong>Preanalytic Phase:</strong> All specimen handling <em>before</em> it reaches the pathology department. Involves many HCWs and many steps — each with additional sub-steps that increase the risk of error.</div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Correctly Identify the Patient</div><div class="step-body">Patient identification is the first and foundational step before any specimen activity.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Correctly Identify and Confirm the Specimen</div><div class="step-body">The surgical team confirms the specimen by verbal communication — surgeon ↔ CST ↔ circulator.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Place in Appropriate Container and Preservative</div><div class="step-body">Correct container type, size, and preservative must be selected based on the specimen type and surgeon's orders.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Correctly Label the Specimen</div><div class="step-body">Label placed on the container side (not lid) in permanent black or blue ink by the circulator in the OR.</div></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-content"><div class="step-title">Complete the Pathology Requisition Slip</div><div class="step-body">Pre-printed form accompanies every specimen. Contains patient identifiers, clinical diagnosis, study requested, surgeon name, and circulator name.</div></div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-content"><div class="step-title">Transport to the Pathology Department</div><div class="step-body">Specimen is transported in a secure, non-transparent, impervious container. Chain of custody is maintained and documented throughout.</div></div></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ TAB 2: STANDARDS I–IV ══════════════════ -->
+  <div id="standards1" class="section">
+    <h2 class="section-heading">Standards I – IV</h2>
+    <p class="section-sub">Preoperative planning, proper containers, handling precautions, and labeling requirements.</p>
+
+    <!-- Standard I -->
+    <div class="exp-card open">
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-left">
+          <div class="exp-tag">Standard I</div>
+          <div class="exp-title">Proper handling begins in the preoperative phase — all communications should involve the surgical team.</div>
+        </div>
+        <span class="exp-chevron">▼</span>
+      </div>
+      <div class="exp-body">
+        <p class="sub-label">Preoperative Coordination Checklist</p>
+        <ul class="detail-list">
+          <li><strong>Type of specimen</strong> — e.g., frozen section, aerobic or anaerobic culture, specimen in preservative</li>
+          <li><strong>Confirm diagnostic studies</strong> with surgeon — Gram stain, acid fast, mycological, etc.</li>
+          <li><strong>Anticipated number of specimens</strong></li>
+          <li><strong>Container type and size</strong> — sterile or clean as appropriate</li>
+          <li><strong>Preservative</strong> — will it be required? What type?</li>
+        </ul>
+        <div class="keypoint"><strong>Cultural Preferences:</strong> The surgical team must be aware of any cultural or religious preferences regarding the specimen (e.g., certain religions require amputated body parts be returned to the patient). This must be documented in the patient's chart. If a patient requests to keep a specimen, it must still undergo pathological examination before being returned, per facility P&amp;P and standard precautions.</div>
+        <p class="sub-label">Chain of Custody Communication</p>
+        <ul class="detail-list">
+          <li>Notify the pathology department of procedures that will have surgical specimens</li>
+          <li>Communicate which procedures will require a <strong>frozen section</strong></li>
+          <li>Alert HCWs in the chain of custody to any <strong>special circumstances</strong> — e.g., frozen section needing immediate delivery, or anaerobic culture requiring immediate transport to the laboratory</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Standard II -->
+    <div class="exp-card">
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-left">
+          <div class="exp-tag">Standard II</div>
+          <div class="exp-title">Specimens should be placed in the proper container to preserve and protect them.</div>
+        </div>
+        <span class="exp-chevron">▼</span>
+      </div>
+      <div class="exp-body">
+        <div class="card-grid two">
+          <div class="card">
+            <div class="card-label">Container Requirements</div>
+            <div class="card-title">Physical Properties</div>
+            <div class="card-body">
+              <ul class="detail-list">
+                <li><strong>Rigid</strong> — structurally sound</li>
+                <li><strong>Impermeable</strong> — no leakage</li>
+                <li><strong>Unbreakable</strong> — protects the specimen during transport</li>
+                <li><strong>Non-reactive</strong> to fixative solutions — prevents HCW exposure to infectious substances</li>
+                <li><strong>Secure, tight-fitting lid</strong> — prevents fixative escape and noxious fume release</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-label">Additional Requirements</div>
+            <div class="card-title">Size, Inventory &amp; Privacy</div>
+            <div class="card-body">
+              <ul class="detail-list">
+                <li>Correct <strong>size</strong> must be used to hold and protect the specimen</li>
+                <li>Healthcare facility must maintain an <strong>inventory of various sizes</strong> to accommodate all specimen types</li>
+                <li>Containers should be <strong>non-transparent</strong> — prevents visualization of contents during transport</li>
+                <li>Accompanying documentation must ensure <strong>patient confidentiality</strong> (HIPAA)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Standard III -->
+    <div class="exp-card">
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-left">
+          <div class="exp-tag">Standard III</div>
+          <div class="exp-title">HCWs should practice appropriate precautions when handling specimens and containers.</div>
+        </div>
+        <span class="exp-chevron">▼</span>
+      </div>
+      <div class="exp-body">
+        <ul class="detail-list">
+          <li><strong>Keep moist:</strong> Specimens must never be allowed to dry. Place in fixative ASAP, or keep in a sterile basin with sterile saline or saline-soaked sponges until placed in fixative</li>
+          <li><strong>No radiopaque sponges:</strong> Specimens must NOT be passed off with or on a radiopaque counted sponge</li>
+          <li><strong>Small specimens:</strong> Place on a sterile Telfa™ pad and pass off the sterile field using aseptic technique</li>
+          <li><strong>Gentle handling by CST (first scrub role):</strong> When receiving from the surgeon and when passing off to the circulator</li>
+          <li><strong>Avoid instruments if possible:</strong> Prevents crushing or damaging tissue. If a surgical instrument must be used, use an atraumatic clamp or tissue forceps</li>
+          <li><strong>Do not crush manually:</strong> Avoid crushing the tissue with fingers when manually handling</li>
+          <li><strong>Large specimens:</strong> May be placed in a sterile basin. Circulator places a towel over basin, puts in a clear impervious bag, and has specimen delivered to pathology immediately</li>
+          <li><strong>CST must get surgeon permission</strong> before passing the specimen off the sterile field</li>
+          <li><strong>Do not open after lidding:</strong> Once the lid is placed, do not open the container — risk of fixative spill and specimen contamination</li>
+        </ul>
+        <div class="keypoint"><strong>Sterile Container Protocol:</strong> CST wipes outside of container with a clean sterile sponge before passing off. Circulator wears gloves when receiving. Circulator wipes outside with a clean sponge/towel and places in a clear, impervious bag.</div>
+      </div>
+    </div>
+
+    <!-- Standard IV -->
+    <div class="exp-card">
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-left">
+          <div class="exp-tag">Standard IV</div>
+          <div class="exp-title">Specimen containers must be properly labeled.</div>
+        </div>
+        <span class="exp-chevron">▼</span>
+      </div>
+      <div class="exp-body">
+        <div class="alert alert-amber">
+          <span class="alert-icon">🏷️</span>
+          <div><strong>Who labels:</strong> The <strong>circulator</strong> writes on the label in the operating room. Use <strong>permanent black or blue ink</strong> only. Label placed on the <strong>side</strong> of the container — never the lid (lost when lid is removed in pathology).</div>
+        </div>
+        <p class="sub-label">Required Label Information (7 Items)</p>
+        <div class="checklist">
+          <div class="check-item"><span class="chk">✓</span><span><strong>A. Type of specimen</strong></span></div>
+          <div class="check-item"><span class="chk">✓</span><span><strong>B. Site of specimen</strong> including left or right side</span></div>
+          <div class="check-item"><span class="chk">✓</span><span><strong>C. Two unique identifiers</strong> e.g., patient name + hospital number</span></div>
+          <div class="check-item"><span class="chk">✓</span><span><strong>D. Date and time</strong> specimen received from CST</span></div>
+          <div class="check-item"><span class="chk">✓</span><span><strong>E. Type of preservative</strong> if used</span></div>
+          <div class="check-item"><span class="chk">✓</span><span><strong>F. Surgeon's name</strong></span></div>
+          <div class="check-item"><span class="chk">✓</span><span><strong>G. Suture tag</strong> if present and placement, e.g., 12 o'clock or lower left quadrant</span></div>
+        </div>
+        <div class="warn-box" style="margin-top:1rem"><strong>Biohazard Labeling:</strong> The container must be clearly labeled as biohazardous when containing a biohazardous substance to protect HCWs handling it and prevent contamination.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ TAB 3: FORMALIN ══════════════════ -->
+  <div id="formalin" class="section">
+    <h2 class="section-heading">Standard V — Formalin &amp; Preservatives</h2>
+    <p class="section-sub">Handling, storage, spill response, and first aid for preservative solutions — with a focus on formalin (formaldehyde).</p>
+
+    <div class="alert alert-red">
+      <span class="alert-icon">☣️</span>
+      <div><strong>Formalin Hazards:</strong> Formaldehyde is dangerous if swallowed; harmful/irritant if inhaled; absorbed through skin causing irritation; causes eye irritation and possible corneal damage if splashed. There is sufficient evidence that formaldehyde can cause <strong>nasopharyngeal cancer in humans</strong>. Formalin is an EPA U-listed hazardous chemical.</div>
+    </div>
+
+    <p class="sub-label">General Preservative Rules</p>
+    <ul class="detail-list">
+      <li>Healthcare facility must establish P&amp;Ps per <strong>OSHA, EPA, and manufacturer recommendations</strong></li>
+      <li>HCWs must be knowledgeable about facility policies and receive training on safe handling, PPE use, accident care, and spill cleanup</li>
+      <li><strong>Use of preservative must be confirmed</strong> by the CST and circulator with the surgeon</li>
+      <li><strong>Do not pour formalin directly over a specimen</strong> — use a pre-poured container to avoid splashing</li>
+    </ul>
+
+    <p class="sub-label">Required PPE When Handling Formalin</p>
+    <div class="ppe-grid">
+      <div class="ppe-item"><div class="ppe-icon">🥽</div><div class="ppe-label">Goggles (eye protection)</div></div>
+      <div class="ppe-item"><div class="ppe-icon">😷</div><div class="ppe-label">Mask</div></div>
+      <div class="ppe-item"><div class="ppe-icon">🛡️</div><div class="ppe-label">Face Shield <em>(in addition to goggles — not a substitute)</em></div></div>
+      <div class="ppe-item"><div class="ppe-icon">🧤</div><div class="ppe-label">Protective impervious gloves</div></div>
+      <div class="ppe-item"><div class="ppe-icon">🥼</div><div class="ppe-label">Protective impervious clothing/cover apparel</div></div>
+      <div class="ppe-item"><div class="ppe-icon">💨</div><div class="ppe-label">NIOSH-approved full facepiece respirator (if above OSHA PEL)</div></div>
+    </div>
+    <div class="keypoint" style="margin-top:1rem"><strong>Hand Washing:</strong> Thoroughly wash hands and forearms after handling formalin, even if gloves were worn.</div>
+
+    <hr class="divider">
+    <p class="sub-label">Formalin Storage Requirements</p>
+    <ul class="detail-list">
+      <li>Designated area in the surgery department must be established for formalin storage</li>
+      <li>Storage room must be <strong>cool, dry, and well-ventilated</strong> with a negative pressure ventilation system and exhaust hood</li>
+      <li>Substances <strong>incompatible with formalin</strong> must not be stored in the same room</li>
+      <li>Containers must be <strong>clearly marked "formalin"</strong> with a chemical hazard label</li>
+      <li>MSDS (Material Safety Data Sheet) for formalin must be <strong>permanently maintained and easily accessible</strong> at all times for HCWs who may be exposed</li>
+      <li>OSHA and EPA regulations for storage must be followed</li>
+    </ul>
+
+    <hr class="divider">
+    <p class="sub-label">Spill Response Protocol</p>
+    <div class="card-grid two">
+      <div class="card">
+        <div class="card-label">Large Spill</div>
+        <div class="card-title">Immediately Leave and Report</div>
+        <div class="card-body">
+          <ul class="detail-list">
+            <li>HCW must <strong>immediately leave the area</strong></li>
+            <li>Report to proper healthcare facility personnel</li>
+            <li>Designated HCWs isolate the area</li>
+            <li>No personnel without proper PPE allowed in the area</li>
+            <li><strong>Immediately remove all ignition sources</strong> from area of spill</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Small Spill</div>
+        <div class="card-title">Don PPE — Neutralize — Clean</div>
+        <div class="card-body">
+          <ul class="detail-list">
+            <li>Don all PPE before approaching spill</li>
+            <li>Remove ignition sources from area immediately</li>
+            <li><strong>Neutralize with sodium hydroxide</strong></li>
+            <li>Use absorbent material to clean spill</li>
+            <li>Place absorbent material in a <strong>hazardous-labeled container</strong> for disposal per EPA regulations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <p class="sub-label">Formalin First Aid Procedures</p>
+    <table class="fa-table">
+      <thead><tr><th>Exposure Type</th><th>Immediate Action</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>👁️ Splashed in Eye(s)</td>
+          <td>Immediately flush the eye(s) with water, occasionally lifting upper and lower eyelids. Seek medical treatment.</td>
+        </tr>
+        <tr>
+          <td>🖐️ Skin Contact</td>
+          <td>Immediately remove contaminated clothing (including shoes if necessary). Flush skin with water. Seek medical treatment.</td>
+        </tr>
+        <tr>
+          <td>💨 Excessive Inhalation</td>
+          <td>Immediately remove HCW from exposure area to fresh air. Rescuer may need PPE if area is heavily contaminated. Administer oxygen via mask ASAP. If unconscious and not breathing, administer artificial respiration after removal from the exposure area.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="keypoint" style="margin-top:1rem"><strong>EPA Classification:</strong> Formalin is a U-listed hazardous chemical regulated by the US Environmental Protection Agency. Disposal must comply with local, state, and federal laws.</div>
+  </div>
+
+  <!-- ══════════════════ TAB 4: SPECIAL SPECIMENS ══════════════════ -->
+  <div id="special" class="section">
+    <h2 class="section-heading">Special Specimen Types</h2>
+    <p class="section-sub">Standards VI–IX — Frozen sections, aerobic/anaerobic cultures (swab and syringe), and radioactive specimens.</p>
+
+    <!-- Standard VI: Frozen Section -->
+    <div class="exp-card open">
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-left">
+          <div class="exp-tag">Standard VI</div>
+          <div class="exp-title">Frozen Section Specimens — Handling, Transport &amp; Communication</div>
+        </div>
+        <span class="exp-chevron">▼</span>
+      </div>
+      <div class="exp-body">
+        <div class="alert alert-amber">
+          <span class="alert-icon">❄️</span>
+          <div><strong>Critical Rule:</strong> Frozen section specimens must be <strong>immediately</strong> passed off the sterile field and delivered to the pathology department. These specimens must <strong>NOT be placed in preservative solution</strong>.</div>
+        </div>
+        <ul class="detail-list">
+          <li><strong>Confirm preoperatively and intraoperatively</strong> with surgeon that the specimen is for frozen section (both CST and circulator)</li>
+          <li>Notify pathology department <strong>preoperatively</strong> of which procedures will have frozen section specimens</li>
+          <li>CST passes off the sterile field to circulator using <strong>aseptic technique</strong>; circulator wears gloves when receiving</li>
+          <li><strong>Do NOT use a counted radiopaque sponge</strong> — use a Telfa™ pad, sterile towel, sterile container, or medicine cup</li>
+          <li><strong>Do NOT place in preservative solution</strong></li>
+          <li>Follow facility P&amp;P for labeling and transport to pathology</li>
+        </ul>
+        <div class="keypoint"><strong>Pathologist Communication:</strong> The pathologist must communicate directly with the surgeon regarding diagnosis. A <strong>verbal direct report</strong> must be recorded in the patient's OR record. The pathologist must be informed of the patient's level of consciousness before giving an oral report. If verbal communication is not possible, a written communication must include date, time, pathologist's signature, and be placed in the OR record.</div>
+      </div>
+    </div>
+
+    <!-- Standard VII: Aerobic/Anaerobic Cultures (Swab) -->
+    <div class="exp-card">
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-left">
+          <div class="exp-tag">Standard VII</div>
+          <div class="exp-title">Aerobic &amp; Anaerobic Culture Specimens (Swab/Tube)</div>
+        </div>
+        <span class="exp-chevron">▼</span>
+      </div>
+      <div class="exp-body">
+        <ul class="detail-list">
+          <li>Culture must be obtained using <strong>aseptic technique</strong> to prevent contamination of the inside of the culture tube and swab</li>
+          <li>If circulator dispensed the culture tube onto the sterile field, <strong>circulator must wear gloves</strong> when the CST passes it off</li>
+          <li>Circulator must <strong>decontaminate the exterior of the culture tube</strong> prior to transport to the laboratory</li>
+          <li>Follow facility P&amp;P for labeling and transport</li>
+          <li><strong>Immediately deliver</strong> to the laboratory department — no delays</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Standard VIII: Anaerobic Syringe -->
+    <div class="exp-card">
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-left">
+          <div class="exp-tag">Standard VIII</div>
+          <div class="exp-title">Anaerobic Culture Specimens — Syringe Aspiration</div>
+        </div>
+        <span class="exp-chevron">▼</span>
+      </div>
+      <div class="exp-body">
+        <div class="card-grid two">
+          <div class="card">
+            <div class="card-label">When Needle Used</div>
+            <div class="card-title">CST Removes Needle First</div>
+            <div class="card-body">
+              <ul class="detail-list">
+                <li>CST removes needle and places in <strong>sharps container on the sterile backtable</strong></li>
+                <li>CST recaps the syringe</li>
+                <li>Passes off the sterile field using aseptic technique</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-label">When No Needle Used</div>
+            <div class="card-title">Recap Before Passing</div>
+            <div class="card-body">
+              <ul class="detail-list">
+                <li>CST recaps the syringe before passing off the sterile field to prevent fluid from escaping</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="warn-box"><strong>Do NOT decontaminate the exterior of the syringe</strong> — this may cause the pushing or pulling of the plunger, resulting in leakage or ejection of the fluid. Circulator wears gloves and places syringe in an impervious bag or container. Lab personnel must be notified that the inside of the bag/container is contaminated since the exterior of the syringe has not been decontaminated.</div>
+        <ul class="detail-list" style="margin-top:1rem">
+          <li>Circulator wears gloves when handling the syringe</li>
+          <li>Place syringe in an <strong>impervious bag or container</strong> for transport</li>
+          <li><strong>Immediately deliver</strong> to the laboratory — no delays</li>
+          <li>Follow facility P&amp;P for proper labeling</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Standard IX: Radioactive -->
+    <div class="exp-card">
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-left">
+          <div class="exp-tag">Standard IX</div>
+          <div class="exp-title">Radioactive Specimens — e.g., Sentinel Lymph Node with Technetium</div>
+        </div>
+        <span class="exp-chevron">▼</span>
+      </div>
+      <div class="exp-body">
+        <div class="alert alert-purple">
+          <span class="alert-icon">☢️</span>
+          <div><strong>Primary Goal:</strong> Keep radiation exposure to HCWs as low as possible. Only HCWs documented by the Radiation Safety Officer (RSO) as trained are authorized to handle radioactive specimens.</div>
+        </div>
+        <ul class="detail-list">
+          <li>Healthcare facility must develop <strong>written procedures</strong> for handling, labeling, transporting, storing, and disposing of radioactive specimens</li>
+          <li>The <strong>RSO (Radiation Safety Officer)</strong> is responsible for training surgical personnel and other HCWs; only RSO-documented HCWs may handle radioactive specimens</li>
+          <li>The <strong>RSO is responsible</strong> for developing all safety procedures</li>
+          <li>Container labeling must follow <strong>US Nuclear Regulatory Commission Regulations</strong></li>
+          <li><strong>Federal law:</strong> Labels indicating radioactive material must be removed prior to disposal of the container</li>
+          <li>Pathology requisition slip must include the <strong>name of the radioactive material</strong> — e.g., "sentinel lymph node – technetium injection"</li>
+          <li>Radioactive specimens must be <strong>immediately transported</strong> from OR to pathology — never left unattended in an unsecured area</li>
+          <li>Personnel transporting to pathology must <strong>wear gloves</strong> when handling the container</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ TAB 5: EVIDENCE & DEVICES ══════════════════ -->
+  <div id="evidence" class="section">
+    <h2 class="section-heading">Standards X–XII — Evidence &amp; Device Specimens</h2>
+    <p class="section-sub">Defective medical devices, medical-legal evidence (bullets, knives), and specimen submission policies.</p>
+
+    <!-- Standard X: Defective Medical Devices -->
+    <div class="exp-card open">
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-left">
+          <div class="exp-tag">Standard X</div>
+          <div class="exp-title">Defective Medical Device Specimens — Reporting &amp; Handling</div>
+        </div>
+        <span class="exp-chevron">▼</span>
+      </div>
+      <div class="exp-body">
+        <ul class="detail-list">
+          <li>Defective medical device must be reported to the <strong>manufacturer per FDA policies and procedures</strong>; healthcare facility report completed and provided to manufacturer with reason for removal</li>
+          <li>Upon removal, device placed in an <strong>impervious bag or appropriate container</strong>; all parts must be kept together</li>
+          <li><strong>Must NOT be decontaminated or sterilized</strong> prior to transport from the surgery department — doing so destroys evidence needed for investigation</li>
+          <li>Device transported to the <strong>pathology department</strong> to document confirmation of identity</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Standard XI: Medical-Legal Evidence -->
+    <div class="exp-card">
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-left">
+          <div class="exp-tag">Standard XI</div>
+          <div class="exp-title">Foreign Objects / Medical-Legal Evidence — Bullets, Knives &amp; Chain of Custody</div>
+        </div>
+        <span class="exp-chevron">▼</span>
+      </div>
+      <div class="exp-body">
+        <div class="alert alert-red">
+          <span class="alert-icon">⚖️</span>
+          <div><strong>Legal Requirement:</strong> Foreign objects such as bullets are medical-legal evidence. Chain of custody must be properly documented from removal by surgeon to transfer to law enforcement.</div>
+        </div>
+
+        <p class="sub-label">Patient Clothing &amp; Belongings</p>
+        <ul class="detail-list">
+          <li>Handle with <strong>non-powdered gloves</strong>; handle clothing as little as possible to avoid particle loss</li>
+          <li>Cut clothing <strong>along the seams</strong>; avoid cutting through holes or punctures — they may indicate bullet or knife entry points</li>
+          <li>Clothing placed in <strong>paper bags</strong> (NOT plastic — plastic confines moisture, decomposing evidence and promoting mold/mildew)</li>
+          <li>Wet/bloody clothing placed in <strong>moisture-proof bags</strong> to prevent leaking and cross-contamination</li>
+          <li>Footwear in a <strong>separate paper bag</strong></li>
+          <li>Stretcher sheets in a <strong>separate paper bag</strong> (evidence may have fallen from clothing)</li>
+          <li>Each bag labeled with patient name, contents, and numbered; documented in OR record</li>
+          <li>Document detailed descriptions of <strong>wounds, body markings, and any skin puncture sites</strong> by OR personnel (e.g., IV insertion site)</li>
+          <li>Document any <strong>statements made by the patient</strong> before or during induction, in detail</li>
+        </ul>
+
+        <p class="sub-label">Bullet Handling Protocol</p>
+        <div class="warn-box"><strong>Do NOT handle bullets with metal instruments</strong> unless tip covers are placed by the CST first. Metal-on-metal can scratch the bullet surface and destroy evidence markings.</div>
+        <ul class="detail-list">
+          <li>CST uses <strong>sterile water to rinse off blood and tissue</strong> — prevents microscopic evidence markings from being destroyed</li>
+          <li>CST places bullet in a <strong>nonmetal specimen container</strong> and passes off to circulator using aseptic technique</li>
+          <li>Circulator wears gloves, decontaminates outside of container, places in an <strong>evidence envelope</strong>, seals, and completes facility evidence document</li>
+          <li>Label must include: patient name and hospital number, date and time of evidence collection, surgeon's name</li>
+        </ul>
+
+        <p class="sub-label">Knife Handling</p>
+        <ul class="detail-list">
+          <li>To avoid smearing fingerprints, handle on areas <strong>not normally handled</strong></li>
+          <li>Immediately placed in evidence envelope or bag by the <strong>surgeon</strong> upon removal</li>
+        </ul>
+
+        <p class="sub-label">Transfer to Law Enforcement</p>
+        <ul class="detail-list">
+          <li>Sealed evidence transferred directly to the <strong>law enforcement officer</strong></li>
+          <li>OR record documentation must include: body area where removed, description of foreign body, <strong>officer name and badge number</strong>, time and method of transfer</li>
+          <li>If officer not immediately available, evidence secured in a <strong>locked location with only one key holder</strong> to guarantee chain of custody</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Standard XII -->
+    <div class="exp-card">
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-left">
+          <div class="exp-tag">Standard XII</div>
+          <div class="exp-title">Policies for Determining Pathology Submission Requirements</div>
+        </div>
+        <span class="exp-chevron">▼</span>
+      </div>
+      <div class="exp-body">
+        <ul class="detail-list">
+          <li>Policies must be <strong>jointly formed by the pathologist and facility's clinical staff</strong>, per The Joint Commission Standards and College of American Pathologists recommendations</li>
+          <li>Policy must include that specimens <strong>not exempted</strong> from examination must be submitted to pathology</li>
+          <li>The <strong>surgeon and pathologist jointly have final decision-making authority</strong> regarding the degree of pathological examination</li>
+          <li>Policies and procedures for the <strong>disposition of tissue specimens</strong> must be based on local, state, and federal regulations</li>
+        </ul>
+        <div class="card-grid three" style="margin-top:1rem">
+          <div class="card">
+            <div class="card-label">Category A</div>
+            <div class="card-title">Not Required to Submit</div>
+            <div class="card-body">Per facility policy — jointly established by pathologist and clinical staff per TJC and CAP recommendations.</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Category B</div>
+            <div class="card-title">Gross Examination Only</div>
+            <div class="card-body">Visual/physical inspection only — no microscopic analysis required per policy.</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Category C</div>
+            <div class="card-title">Routine Microscopic Examination</div>
+            <div class="card-body">Full pathological examination required. Specimens not exempted must always be submitted.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ TAB 6: SYSTEMS & DOCS ══════════════════ -->
+  <div id="systems" class="section">
+    <h2 class="section-heading">Standard XIII — Systems Approach &amp; Documentation</h2>
+    <p class="section-sub">A systems-based framework for identification, handling, communication, documentation, transportation, and disposition of specimens.</p>
+
+    <div class="alert alert-teal">
+      <span class="alert-icon">🔄</span>
+      <div><strong>Systems Approach Philosophy:</strong> Rather than focusing blame on an individual, a systems approach views the handling process as a whole and establishes safeguards to reduce error risk. If an error occurs, policies and procedures can be reviewed and revised to prevent future system errors.</div>
+    </div>
+
+    <p class="sub-label">Key Systems Principles</p>
+    <div class="card-grid two">
+      <div class="card">
+        <div class="card-label">A. Communication</div>
+        <div class="card-title">Consistent Verbal &amp; Written Methods</div>
+        <div class="card-body">Establish consistent verbal and written communication methods and chain of custody. Develop a flowchart that can be periodically reviewed. Verbal confirmation between surgeon ↔ CST ↔ circulator at each hand-off.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">B. Immediate Containment</div>
+        <div class="card-title">Place &amp; Label Immediately</div>
+        <div class="card-body">Placing the specimen in its container and labeling it immediately reduces the risk of loss during OR cleanup. Verbal confirmation of patient and specimen information at each transfer point aids accuracy.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">C. Pre-Printed Forms &amp; Checklists</div>
+        <div class="card-title">Reduce Reliance on Memory</div>
+        <div class="card-body">Use checklists, laboratory requisition slips, and daily specimen logs. The circulator completes a checklist before the specimen leaves the OR ("Has the specimen been verified?" — each surgical team member verifies).</div>
+      </div>
+      <div class="card">
+        <div class="card-label">E. Chain of Custody Tracking</div>
+        <div class="card-title">Minimize Hand-offs</div>
+        <div class="card-body">Each hand-off is a potential error source — minimize the number. A surgery department specimen log book records: specimen name, two patient identifiers, date, time of log-in, and name of each HCW involved.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">F. Transport Schedule</div>
+        <div class="card-title">Established Pick-up Times</div>
+        <div class="card-body">The pathology, laboratory, and surgery departments must agree on a set schedule for pick-up/transport of permanent specimens.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">G. Designated Oversight</div>
+        <div class="card-title">One Department Owns the System</div>
+        <div class="card-body">A designated department (e.g., pathology) should oversee the specimen system, including development and revision of policies, to create ownership of the process.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <p class="sub-label">Requisition Form — Required Information</p>
+    <div class="req-form">
+      <div class="req-form-title">Pathology / Laboratory Requisition Form</div>
+      <div class="req-grid">
+        <div class="req-field"><div class="req-field-label">Patient Name</div><div class="req-field-val">Full legal name</div></div>
+        <div class="req-field"><div class="req-field-label">HF Identification Number</div><div class="req-field-val">Healthcare facility patient ID</div></div>
+        <div class="req-field"><div class="req-field-label">Unit / Room Number</div><div class="req-field-val">Patient's assigned location</div></div>
+        <div class="req-field"><div class="req-field-label">Clinical Diagnosis</div><div class="req-field-val">Reason for specimen collection</div></div>
+        <div class="req-field"><div class="req-field-label">Surgeon's Name</div><div class="req-field-val">Operating surgeon</div></div>
+        <div class="req-field"><div class="req-field-label">Source of Specimen</div><div class="req-field-val">Anatomical location, side, etc.</div></div>
+        <div class="req-field"><div class="req-field-label">Type of Tissue</div><div class="req-field-val">e.g., soft tissue, bone, organ</div></div>
+        <div class="req-field"><div class="req-field-label">Date &amp; Time of Collection</div><div class="req-field-val">In the OR</div></div>
+        <div class="req-field"><div class="req-field-label">Study Requested</div><div class="req-field-val">Culture, Gram stain, frozen section, etc.</div></div>
+        <div class="req-field"><div class="req-field-label">Other Clinical Information</div><div class="req-field-val">Any pertinent additional details</div></div>
+        <div class="req-field"><div class="req-field-label">Circulator Name</div><div class="req-field-val">HCW who completed documentation and prepared specimen for transport</div></div>
+      </div>
+    </div>
+
+    <div class="keypoint" style="margin-top:1.25rem"><strong>Periodic Training:</strong> HCWs involved in specimen handling must receive periodic training that includes review of P&amp;Ps and feedback opportunities for system improvement.</div>
+  </div>
+
+  <!-- ══════════════════ TAB 7: COMPETENCY ══════════════════ -->
+  <div id="competency" class="section">
+    <h2 class="section-heading">CST / CSFA Competency Statements</h2>
+    <p class="section-sub">Formal competency requirements and measurable criteria for Certified Surgical Technologists and Certified Surgical First Assistants.</p>
+
+    <div class="alert alert-teal">
+      <span class="alert-icon">🏅</span>
+      <div><strong>Applies to:</strong> CSTs (Certified Surgical Technologists) and CSFAs (Certified Surgical First Assistants). Educational standards are established by the <em>Core Curriculum for Surgical Technology</em> and the <em>Core Curriculum for Surgical Assisting</em>.</div>
+    </div>
+
+    <table class="comp-table">
+      <thead><tr><th>Competency Statement</th><th>Measurable Criteria</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="comp-num">1.</span>CSTs and CSFAs have the knowledge and skills for the <strong>proper handling of all types of surgical specimens</strong> in the perioperative environment — including documentation, labeling, containment, storing, and transporting.</td>
+          <td>
+            <ul class="detail-list">
+              <li>Educational standards per the Core Curriculum for Surgical Technology and Core Curriculum for Surgical Assisting</li>
+              <li>Care and handling of specimens included in CAAHEP- and ABHES-accredited surgical technology didactic studies, including documentation and legal/ethical aspects</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="comp-num">2.</span>CSTs and CSFAs understand and implement the <strong>policies and procedures for chain of custody</strong> of specimens.</td>
+          <td>
+            <ul class="detail-list">
+              <li>Students demonstrate knowledge of specimen handling in lab/mock OR and during clinical rotation, including PPE use</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="comp-num">3.</span>CSTs and CSFAs have the knowledge and skills for implementing <strong>aseptic technique</strong> in the handling of specimens on and off the sterile field.</td>
+          <td>
+            <ul class="detail-list">
+              <li>As practitioners, CSTs and CSFAs handle specimens per facility P&amp;P. Where protocols allow, CSTs and CSFAs complete required documentation.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="comp-num">4.</span>CSTs and CSFAs understand and implement <strong>EPA, CDC, and OSHA regulations</strong> for handling toxic preservative solutions.</td>
+          <td>
+            <ul class="detail-list">
+              <li>CSTs and CSFAs complete continuing education to remain current on Standard Precautions and PPE</li>
+              <li>Annual review of facility policies on specimen handling</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="comp-num">5.</span>CSTs and CSFAs are knowledgeable of <strong>Standard Precautions and PPE use</strong> when handling specimens.</td>
+          <td rowspan="2">
+            <ul class="detail-list">
+              <li>CSTs and CSFAs complete continuing education to remain current in their knowledge of Standard Precautions and PPE, as well as annual review of facility policies</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="comp-num">6.</span>CSTs and CSFAs understand the <strong>physical and psychological effects on the patient</strong> regarding loss, mishandling, or damage to a specimen, as well as the <strong>legal ramifications</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="divider">
+    <p class="sub-label">Key Regulatory Agencies &amp; Standards</p>
+    <div class="card-grid two">
+      <div class="card">
+        <div class="card-label">Safety &amp; Environmental</div>
+        <div class="card-title">Governing Agencies</div>
+        <div class="card-body">
+          <ul class="detail-list">
+            <li><strong>OSHA</strong> — Workplace safety; formalin PEL; PPE requirements; hazardous chemical exposure</li>
+            <li><strong>EPA</strong> — Formalin as U-listed hazardous waste; storage and disposal regulations</li>
+            <li><strong>US NRC</strong> — Nuclear Regulatory Commission; radioactive specimen labeling requirements</li>
+            <li><strong>FDA</strong> — Defective medical device reporting requirements</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Clinical &amp; Accreditation</div>
+        <div class="card-title">Standards Bodies</div>
+        <div class="card-body">
+          <ul class="detail-list">
+            <li><strong>The Joint Commission</strong> — National Patient Safety Goals; specimen submission standards</li>
+            <li><strong>College of American Pathologists (CAP)</strong> — Specimen submission policies; gross/microscopic examination standards</li>
+            <li><strong>HIPAA</strong> — Patient confidentiality of specimen documentation and containers</li>
+            <li><strong>WHO</strong> — Guidelines for safe transport of infectious substances and diagnostic specimens</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end content-wrap -->
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleExp(head) {
+  head.closest('.exp-card').classList.toggle('open');
+}
+</script>
+</body>
+</html>
